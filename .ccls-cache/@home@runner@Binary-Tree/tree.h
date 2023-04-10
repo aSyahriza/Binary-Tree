@@ -1,6 +1,10 @@
 #include <iostream>
 #include <cstring>
 
+#include <vector>
+
+using namespace std;
+
 #include "node.h"
 
 class Tree{
@@ -8,12 +12,13 @@ class Tree{
 public:
   Tree();
   ~Tree();
-  void addValues(int num);
+  void addValue(Node* current, Node* newNode);
+  void addVector(vector<int> vect);
   void addFile(char* fileName);
   void removeNode(int num);
   bool searchTree(int num);
-  void printHeap();
-  void recurseHeap(int index, int levels, int currentLevel);
+  void print();
+  void recurseHeap(Node* current, int currentLevel);
 
   int numOfNodes;
   
