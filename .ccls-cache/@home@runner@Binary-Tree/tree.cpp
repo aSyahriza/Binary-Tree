@@ -110,7 +110,6 @@ Node* Tree::removeNode(Node* current, int num){
       delete current;
       return NULL;
     }
-    
     else if(current->getLeft()==NULL){
       return current->getRight();
       delete current;
@@ -120,6 +119,7 @@ Node* Tree::removeNode(Node* current, int num){
       delete current;
     }
     else{
+      // If both children are present
       Node* temp = current->getLeft();
       int ctr = 0;
       while(temp->getRight()!=NULL){
@@ -138,7 +138,7 @@ Node* Tree::removeNode(Node* current, int num){
         head = temp;
       }
       
-      
+      // Sets the parent of temp's right child to null
       Node* temp2 = current->getLeft();
       for(int i = 0; i < ctr-1;i++){
         temp2 = temp2->getRight();
@@ -148,16 +148,21 @@ Node* Tree::removeNode(Node* current, int num){
       return temp;
     }
   }
+    // Get new child to replace removed value
   else if(current->getLeft()->getValue()==num){
     current->setLeft(removeNode(current->getLeft(),num));
   }
 
+  // Get new child to replace removed value.
   else if(current->getRight()->getValue()==num){
     current->setRight(removeNode(current->getRight(),num));
   }
+
+  // Traverse left child
   else if(num < current->getValue()){
     removeNode(current->getLeft(),num);
   }
+  // Traverse into rigth child
   else if(num > current->getValue()){
     removeNode(current->getRight(),num);
   }
