@@ -15,7 +15,9 @@ Node::~Node(){
   left = NULL;
   right = NULL;
 }
-int getValue();
+int Node::getValue(){
+  return value;
+}
 Node* Node::getLeft(){
   return left;
 }

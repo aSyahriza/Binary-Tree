@@ -18,12 +18,13 @@ public:
   void removeNode(int num);
   bool searchTree(int num);
   void print();
-  void recurseHeap(Node* current, int currentLevel);
+  void recursePrint(Node* current, int currentLevel);
 
-  int numOfNodes;
+  
   
 
 private:
+  int numOfNodes = 0;
   Node* head;
   
 

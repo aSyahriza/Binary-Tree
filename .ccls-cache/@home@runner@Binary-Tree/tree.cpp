@@ -11,6 +11,11 @@ Tree::~Tree(){
 }
 
 void Tree::addValue(Node* current, Node* newNode){
+  if(numOfNodes == 0){
+    head = newNode;
+    numOfNodes++;
+    return;
+  }
   if(newNode->getValue()<=current->getValue()){
     if(current->getLeft()==NULL){
       current->setLeft(newNode);
@@ -20,7 +25,7 @@ void Tree::addValue(Node* current, Node* newNode){
       addValue(current->getLeft(),newNode);
     }
   }
-  else if(newNode->getValue()>current->getValue()){
+  if(newNode->getValue()>current->getValue()){
     if(current->getRight()==NULL){
       current->setRight(newNode);
       numOfNodes++;
@@ -54,6 +59,9 @@ void Tree::addFile(char* fileName){
     ifstream MyReadFile(fileName);
     int temp;
     while (MyReadFile >> temp){
+      if(temp > 999){
+        continue;
+      }
       Node* newNode = new Node(temp);
       addValue(head,newNode);
     }
@@ -70,13 +78,18 @@ bool Tree::searchTree(int num){
   
 }
 void Tree::print(){
-  
-}
-void Tree::recurseHeap(Node* current,int currentLevel){
-  if(current->getRight()!=NULL){
-    recurseHeap(current->getRight(),currentLevel++);
+  if(numOfNodes==0){
+    cout <<"List is empty." << "\n" << endl;
+    return;
   }
-
+  recursePrint(head,1);
+}
+void Tree::recursePrint(Node* current,int currentLevel){
+  if(current->getRight()!=NULL){
+    int newLevel = currentLevel + 1;
+    recursePrint(current->getRight(),newLevel);
+  }
+  
   for(int j = 0; j < currentLevel-1; j++){
     cout << "\t";
   }
@@ -84,7 +97,8 @@ void Tree::recurseHeap(Node* current,int currentLevel){
   cout << current->getValue()<< endl;
 
   if(current->getLeft()!=NULL){
-    recurseHeap(current->getLeft(),currentLevel++);
+    int newLevel = currentLevel + 1;
+    recursePrint(current->getLeft(),newLevel);
   }
 
   
