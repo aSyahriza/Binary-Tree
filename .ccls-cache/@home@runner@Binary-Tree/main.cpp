@@ -1,3 +1,14 @@
+/*
+* Author: Allam Syahriza
+* Date: 4/9/2023
+* Project: Binary Tree
+* This project creates a binary tree of nodes with 
+* integers as values. The user can add vallues, remove a value, 
+* print, or search the tree
+* 
+*
+*/
+
 #include <iostream>
 #include <cstring>
 
@@ -14,7 +25,7 @@ int main() {
   char command[20];
   char* fileName = new char[20];
 
-  cout << "Enter ADD, ADD BY FILE, REMOVE, PRINT, or QUIT" << endl;
+  cout << "Enter ADD, ADD BY FILE, REMOVE, PRINT, SEARCH, or QUIT" << endl;
   cout << "\n" << endl;
   
   while(loop){
@@ -48,12 +59,44 @@ int main() {
       cout << "\n";
       
     }
+    // Checks if user wants to remove a number
+    if(strcmp(command, "REMOVE")==0){
+      int num;
+      cout << "Enter number to remove: " << endl;
+      cin >> num;
+      if(myTree.searchTree(myTree.getHead(),num)==false){
+        cout << "Value not in tree" << endl;
+        continue;
+      }
+      myTree.removeNode(myTree.getHead(),num);
+      cout << "Value has been removed." << "\n" << endl;
+    }
 
+    // Check if the user wants to print the tree
     if(strcmp(command, "PRINT") == 0){
       myTree.print();
+      cout << endl;
+    }
+
+    // Check if the user wants to search the tree for a number
+    if(strcmp(command, "SEARCH") == 0){
+      int num;
+      cout << "Enter number you wish to search for: " << endl;
+      cin >> num;
+      if((myTree.searchTree(myTree.getHead(), num))==false){
+        cout << "Value is not in tree." << endl;
+      }
+      else{
+        cout << "Value is in tree." << endl;
+      }
+      cout << "\n" << endl;
+    }
+    // Quit
+    if(strcmp(command, "QUIT") == 0){
+      loop = false;
     }
   }  
   
-  cout << "Hello World!\n";
+  cout << "Program ended. " << endl;
   
 }
